@@ -73,20 +73,3 @@ like that snippet, it's a few lines and needs no separate hosting.
 - No external JS libraries — the flip cards, drawer, sparkle effect, and
   loading screen are all hand-rolled CSS/JS.
 
-## What's already built in
-
-- Homepage shows only two track buttons (Technical / Non-Technical) — no
-  event details on the home page itself.
-- Choosing a track reveals a top-left hamburger button; opening it slides
-  in a drawer of that track's 5 events as flip cards (tap to flip, see
-  blurb + fee, then follow through to the full page and Razorpay link).
-- Each event page shows its full description and rules directly, plus a
-  "Register & pay" button to that event's Razorpay Payment Page.
-- A Windows 95-style loading screen (progress bar + jumpy percentage) on
-  both pages, fading out once ready.
-- A short synthesized click sound and sparkle burst on every button —
-  no audio files or extra libraries needed.
-- An animated network background on the homepage: drifting, twinkling
-  nodes plus two slow ambient glow blobs, `prefers-reduced-motion`-aware.
-- 10-slot sponsor grid, countdown timer, responsive layout, keyboard
-  focus states.
