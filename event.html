@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Event details — VERTEX '26</title>
+<meta name="description" id="pageDesc" content="Event details">
+
+<script src="events-data.js"></script>
+
+<!-- Tech-inspired type: Orbitron for display, JetBrains Mono for mono, Rajdhani for body -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0A0C10;
+    --panel:#12151C;
+    --panel-line:#232830;
+    --text:#EDEFF2;
+    --text-dim:#9AA2AD;
+    --signal:#5B8DEF;
+    --pulse:#FFC857;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display: 'Orbitron', var(--mono);
+    --body: 'Rajdhani', system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--ink); color:var(--text); font-family:var(--body); line-height:1.6; }
+  a{ color:inherit; }
+
+  nav{
+    position:sticky; top:0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1rem 5%;
+    background:rgba(10,12,16,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--panel-line);
+  }
+  .logo{ font-family:var(--display); font-size:1.15rem; letter-spacing:0.02em; text-decoration:none; }
+  .logo span{ color:var(--signal); }
+  nav a.back{ color:var(--text-dim); text-decoration:none; font-size:0.9rem; }
+  nav a.back:hover{ color:var(--text); }
+
+  main{ max-width:900px; margin:0 auto; padding:3rem 5% 6rem; }
+
+  .breadcrumb{ font-family:var(--mono); font-size:0.78rem; color:var(--text-dim); margin-bottom:1.5rem; }
+  .breadcrumb .cat{ color:var(--signal); }
+
+  .event-hero-img{
+    width:100%; max-height:420px; object-fit:cover;
+    border-radius:10px; border:1px solid var(--panel-line);
+    margin-bottom:2rem; display:block;
+  }
+
+  h1{ font-family:var(--display); font-size:clamp(1.9rem,5vw,2.8rem); margin:0 0 0.6rem 0; }
+
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center;
+    font-family:var(--mono); font-size:0.85rem; color:var(--text-dim);
+    margin-bottom:2rem;
+  }
+  .fee-badge{
+    background:var(--panel); border:1px solid var(--panel-line);
+    color:var(--pulse); padding:0.35rem 0.8rem; border-radius:4px;
+  }
+
+  .btn{
+    display:inline-block; padding:0.85rem 1.6rem; border-radius:4px;
+    font-weight:600; text-decoration:none; font-size:0.95rem;
+    border:none; cursor:pointer; transition:transform 0.15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--signal); color:var(--ink); }
+  .btn-ghost{ border:1px solid var(--panel-line); color:var(--text); background:transparent; }
+
+  .desc-block{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:8px;
+    padding:1.8rem; margin:2rem 0;
+  }
+  .desc-block h2{ font-family:var(--display); font-size:1.1rem; margin:0 0 1rem 0; }
+  .desc-block p{ color:var(--text-dim); margin:0 0 1rem 0; }
+
+  .rules-list{ margin:0; padding-left:1.2rem; color:var(--text-dim); }
+  .rules-list li{ margin-bottom:0.5rem; }
+
+  .cta-bar{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:2rem; }
+
+  /* -------- loading screen: full-page hacker/terminal boot sequence
+     (base layout here; the terminal look itself is injected by
+     ui-effects.js so it's shared identically across every page) -------- */
+  .loading-screen{ position:fixed; inset:0; z-index:999; background:#000; }
+
+  /* -------- click sparkle -------- */
+  .ui-spark{
+    position:fixed; width:6px; height:6px; border-radius:50%;
+    background:var(--pulse); pointer-events:none; z-index:300;
+    animation:sparkle-fly 0.5s ease-out forwards;
+  }
+  @keyframes sparkle-fly{
+    0%{ transform:translate(0,0) scale(1); opacity:1; }
+    100%{ transform:translate(var(--dx), var(--dy)) scale(0); opacity:0; }
+  }
+
+  .pay-panel{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:8px;
+    padding:1.8rem; margin:2rem 0;
+  }
+  .pay-panel h2{ font-family:var(--display); font-size:1.05rem; margin:0 0 0.5rem 0; }
+  .pay-panel p{ color:var(--text-dim); font-size:0.9rem; margin:0 0 1rem 0; }
+
+  .form-embed{ margin:2rem 0; }
+  .form-embed h2{ font-family:var(--display); font-size:1.1rem; margin:0 0 1rem 0; }
+  .form-embed iframe{ width:100%; min-height:520px; border:none; border-radius:8px; background:#fff; }
+  .form-embed .hint{ color:var(--text-dim); font-size:0.85rem; margin-top:0.6rem; }
+
+  .not-found{ text-align:center; padding:6rem 1rem; color:var(--text-dim); }
+  .not-found a{ color:var(--signal); }
+
+  footer{ border-top:1px solid var(--panel-line); padding:3rem 5%; text-align:center; color:var(--text-dim); font-size:0.85rem; }
+  footer a{ color:var(--signal); text-decoration:none; }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--pulse); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="terminal-boot">
+    <pre id="bootLines"></pre><span class="boot-cursor">▌</span>
+  </div>
+</div>
+
+<nav>
+  <a class="logo" id="navLogo" href="index.html"><span>▲</span> </a>
+  <div style="display:flex; align-items:center; gap:1.4rem;">
+    <a class="back" href="contact.html">Contact</a>
+    <a class="back" href="index.html#events">← All events</a>
+  </div>
+</nav>
+
+<main id="mainContent">
+  <!-- Filled in by JS once the event is found. -->
+</main>
+
+<footer>
+  <p id="footerCollege"></p>
+  <p>
+    Questions? Email <a id="footerEmail" href="#"></a>
+  </p>
+</footer>
+
+<script src="ui-effects.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+  const ev = CONFIG.events.find(e => e.slug === slug);
+  const main = document.getElementById("mainContent");
+
+  document.getElementById("footerCollege").textContent = CONFIG.collegeName;
+  document.getElementById("footerEmail").textContent = CONFIG.contactEmail;
+  document.getElementById("footerEmail").href = "mailto:" + CONFIG.contactEmail;
+  document.getElementById("navLogo").append(" " + CONFIG.eventName);
+
+  if (!ev) {
+    main.innerHTML = `
+      <div class="not-found">
+        <h1 style="font-family:var(--display); font-size:1.6rem;">Event not found</h1>
+        <p>That event link looks broken or out of date.</p>
+        <p><a href="index.html#events">Back to all events →</a></p>
+      </div>
+    `;
+  } else {
+    document.title = ev.title + " — " + CONFIG.eventName;
+    document.getElementById("pageDesc").content = ev.blurb;
+
+    const rulesHtml = (ev.rules || []).map(r => `<li>${r}</li>`).join("");
+
+    main.innerHTML = `
+      <div class="breadcrumb"><span class="cat">${ev.category}</span> · ${CONFIG.eventName}</div>
+      <img class="event-hero-img" src="${ev.image}" alt="${ev.title}" loading="lazy">
+      <h1>${ev.title}</h1>
+      <div class="meta-row">
+        <span class="fee-badge">Fee: ${ev.fee}</span>
+        <span>${CONFIG.eventDateDisplay}</span>
+        <span>${CONFIG.venue}</span>
+      </div>
+
+      <p style="color:var(--text-dim); max-width:65ch;">${ev.blurb}</p>
+
+      <div class="desc-block">
+        <h2>About this event</h2>
+        <p>${ev.fullDescription || ev.blurb}</p>
+        ${rulesHtml ? `
+          <h2 style="margin-top:1.5rem;">Rules &amp; eligibility</h2>
+          <ul class="rules-list">${rulesHtml}</ul>
+        ` : ""}
+      </div>
+
+      <div class="pay-panel">
+        <div>
+          <h2>Register & pay ${ev.fee}</h2>
+          <p>Registration and payment happen on Razorpay's secure payment page — it collects your
+             name, email, phone, and college directly, so there's nothing else to fill in.</p>
+          <a class="btn btn-primary" href="${ev.razorpayLink}" target="_blank" rel="noopener">Register & pay ${ev.fee} on Razorpay</a>
+        </div>
+      </div>
+
+      ${CONFIG.googleFormUrl ? `
+      <div class="form-embed">
+        <h2>Have extra details to share?</h2>
+        <iframe src="${CONFIG.googleFormUrl}" title="Additional details form" loading="lazy">Loading form…</iframe>
+        <p class="hint">Optional — use this only if the organizers have asked for anything beyond
+          what Razorpay already collects.</p>
+      </div>
+      ` : ""}
+
+      <div class="cta-bar">
+        <a class="btn btn-ghost" href="index.html#events">Browse other events</a>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
