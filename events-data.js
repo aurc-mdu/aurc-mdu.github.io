@@ -14,18 +14,18 @@
 const CONFIG = {
   eventName:        "VERTEX '26",
   eventTagline:      "Where ideas connect.",
-  collegeName:       "Department of Computer Science & Engineering",
+  collegeName:       "Anna University Regional Campus Madurai Department of Computer Science & Engineering",
   eventDateISO:      "2026-09-18T09:00:00",
   eventDateDisplay:  "18–19 September 2026",
-  venue:             "Main Auditorium, Your College Name",
-  contactEmail:      "cse.symposium@yourcollege.edu",
+  venue:             "Main Auditorium, Anna University Regional Campus Madurai",
+  contactEmail:      "vertex26@annauniv.edu",
   instagramUrl:      "#",
   linkedinUrl:       "#",
 
   // Optional: one Google Form if you'd rather also collect details
   // separately from Razorpay's own custom fields. Leave blank ("") to
   // hide the embedded form on event pages entirely.
-  googleFormUrl: "",
+  googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSf3RR7chV8XsWDJ3wmDEpRfv0JD12mrAZdprkLvrM4cylFc-g/viewform?usp=sharing&ouid=113783326047631300675",
 
   events: [
     // ---- Technical events ----
