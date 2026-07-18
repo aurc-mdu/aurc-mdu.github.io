@@ -12,7 +12,7 @@
 // Razorpay dashboard and swap in each event's own link instead.
 // ============================================================
 const CONFIG = {
-  eventName:        "VERTEX '26",
+  eventName:        "VORTEX '26",
   eventTagline:      "Where ideas connect.",
   collegeName:       "Anna University Regional Campus Madurai ",
   deptName:          "Department of Computer Science & Engineering Presents",
