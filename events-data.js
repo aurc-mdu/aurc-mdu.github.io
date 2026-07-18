@@ -40,10 +40,10 @@ const CONFIG = {
         "Plagiarism checks apply — cite all external sources.",
         "Judging on originality, clarity, and depth of analysis."
       ],
-      fee:"₹150", feeAmount:150, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Paper+Presentation",
+      fee:"₹250", feeAmount:150, image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb6lnS9du-_QyxxpuTyfdOOeTgyM3xA86trxS3Z_h4jdARZkJj6gXHlaEm&s=10",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
 
-    { slug:"hackathon", category:"Technical", title:"Hackathon",
+    { slug:"algorithmic auction", category:"Technical", title:"algorithmic auction",
       blurb:"24-hour build sprint, teams of up to 4, problem statements released on the day.",
       fullDescription:"A 24-hour on-campus build sprint. Problem statements across tracks (web, mobile, AI/ML, and open innovation) are released at kickoff — no pre-built projects allowed. Mentors circulate throughout the night, and final demos are judged live the next morning. Meals and a dedicated workspace are provided for registered teams.",
       rules:[
@@ -53,7 +53,7 @@ const CONFIG = {
         "Final demo: 5 minutes + 3-minute Q&A per team.",
         "Judged on innovation, technical execution, and completeness."
       ],
-      fee:"₹400 / team", feeAmount:400, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Hackathon",
+      fee:"₹250 / team", feeAmount:400, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Hackathon",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
 
     { slug:"coding-contest", category:"Technical", title:"Coding Contest",
