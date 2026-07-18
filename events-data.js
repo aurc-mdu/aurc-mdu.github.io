@@ -14,9 +14,10 @@
 const CONFIG = {
   eventName:        "VERTEX '26",
   eventTagline:      "Where ideas connect.",
-  collegeName:       "Anna University Regional Campus Madurai Department of Computer Science & Engineering",
-  eventDateISO:      "2026-09-18T09:00:00",
-  eventDateDisplay:  "18–19 September 2026",
+  collegeName:       "Anna University Regional Campus Madurai ",
+  deptName:          "Department of Computer Science & Engineering",
+  eventDateISO:      "2026-09-11T09:00:00",
+  eventDateDisplay:  "11 September 2026",
   venue:             "Main Auditorium, Anna University Regional Campus Madurai",
   contactEmail:      "vertex26@annauniv.edu",
   instagramUrl:      "#",
