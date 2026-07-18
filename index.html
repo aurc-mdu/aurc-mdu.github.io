@@ -237,14 +237,17 @@
   </nav>
 
   <div class="hero">
-    <div class="eyebrow" id="heroEyebrow"></div>
+    <div class="eyebrow" id="heroEyebrow">
+    <div class="eyebrow" id="heroEyebrow1">
+    </div>
     <h1 id="heroTitle"></h1>
     <p class="tagline" id="heroTagline"></p>
     <div class="hero-meta">
-      <div><strong id="metaDate"></strong>Dates</div>
+      <div><strong id="metaDate"></strong>Date</div>
       <div><strong id="metaVenue"></strong>Venue</div>
       <div><strong>10</strong>Events</div>
-    </div>
+    </div> 
+  
     <div class="cta-row">
       <a class="btn btn-primary" href="#events">Browse events</a>
       <a class="btn btn-ghost" href="#sponsors">Our sponsors</a>
@@ -316,7 +319,7 @@
   document.title = CONFIG.eventName + " — CSE Symposium";
   document.getElementById("navLogo").append(" " + CONFIG.eventName);
   document.getElementById("heroEyebrow").textContent = CONFIG.collegeName;
-  document.getElementById("heroEyebrow").textContent = CONFIG.deptName;
+  document.getElementById("heroEyebrow1").textContent = CONFIG.deptName;
   document.getElementById("heroTitle").textContent = CONFIG.eventName;
   document.getElementById("heroTagline").textContent = CONFIG.eventTagline;
   document.getElementById("metaDate").textContent = CONFIG.eventDateDisplay;
