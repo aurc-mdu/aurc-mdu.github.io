@@ -12,14 +12,14 @@
 // Razorpay dashboard and swap in each event's own link instead.
 // ============================================================
 const CONFIG = {
-  eventName:        "VORTEX '26",
-  eventTagline:      "Where ideas connect.",
+  eventName:        "SYNKRONIX '26",
+  eventTagline:      "One day. In sync.",
   collegeName:       "Anna University Regional Campus Madurai ",
   deptName:          "Department of Computer Science & Engineering Presents",
   eventDateISO:      "2026-09-11T09:00:00",
   eventDateDisplay:  "11 September 2026",
   venue:             "Main Auditorium, Anna University Regional Campus Madurai",
-  contactEmail:      "vertex26@annauniv.edu",
+  contactEmail:      "synkronix26@annauniv.edu",
   instagramUrl:      "#",
   linkedinUrl:       "#",
 
