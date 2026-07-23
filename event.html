@@ -56,6 +56,8 @@
 
   h1{ font-family:var(--display); font-size:clamp(1.9rem,5vw,2.8rem); margin:0 0 0.6rem 0; }
 
+  .tagline{ font-family:var(--mono); color:var(--pulse); font-size:0.95rem; margin:0 0 1rem 0; }
+
   .meta-row{
     display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center;
     font-family:var(--mono); font-size:0.85rem; color:var(--text-dim);
@@ -84,6 +86,33 @@
 
   .rules-list{ margin:0; padding-left:1.2rem; color:var(--text-dim); }
   .rules-list li{ margin-bottom:0.5rem; }
+
+  .plain-list{ margin:0; padding-left:1.2rem; color:var(--text-dim); }
+  .plain-list li{ margin-bottom:0.5rem; }
+
+  .fact-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:1rem 1.5rem; margin:0 0 2rem 0;
+  }
+  .fact-item{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:8px;
+    padding:0.9rem 1.1rem;
+  }
+  .fact-label{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.04em;
+    text-transform:uppercase; color:var(--signal); margin:0 0 0.3rem 0;
+  }
+  .fact-value{ font-size:0.98rem; color:var(--text); margin:0; }
+
+  .info-section{ margin:2rem 0; }
+  .info-section h2{ font-family:var(--display); font-size:1.05rem; margin:0 0 1rem 0; }
+  .info-section > p{ color:var(--text-dim); margin:0 0 1rem 0; }
+
+  .dates-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:1rem;
+  }
+  .dates-grid .fact-item .fact-value{ font-family:var(--mono); font-size:0.9rem; }
 
   .cta-bar{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:2rem; }
 
@@ -175,28 +204,102 @@
     document.title = ev.title + " — " + CONFIG.eventName;
     document.getElementById("pageDesc").content = ev.blurb;
 
+    // ---- helpers -------------------------------------------------
+    // Turn a camelCase key like "paperSubmissionDeadline" into
+    // "Paper Submission Deadline" for display.
+    const labelize = (key) => key
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replace(/^./, c => c.toUpperCase());
+
+    // Render a value that may be a string OR an array of strings as
+    // either a plain paragraph or a bulleted list.
+    const listOrPara = (val) => {
+      if (!val) return "";
+      if (Array.isArray(val)) {
+        if (!val.length) return "";
+        return `<ul class="plain-list">${val.map(v => `<li>${v}</li>`).join("")}</ul>`;
+      }
+      return `<p>${val}</p>`;
+    };
+
+    // Build one entry for the quick-facts grid, skipping empty values.
+    const fact = (label, value) => value
+      ? `<div class="fact-item"><p class="fact-label">${label}</p><p class="fact-value">${value}</p></div>`
+      : "";
+
+    // Build a full info-section (heading + list/paragraph content),
+    // skipping the whole section if there's nothing to show.
+    const section = (title, content) => content
+      ? `<div class="info-section"><h2>${title}</h2>${content}</div>`
+      : "";
+
     const rulesHtml = (ev.rules || []).map(r => `<li>${r}</li>`).join("");
+
+    // Quick-facts strip: team size, venue (falls back to the global
+    // event venue if the event doesn't override it), presentation
+    // format, who's organizing it, and judging criteria.
+    const factsHtml = [
+      fact("Team size", ev.teamSize),
+      fact("Venue", ev.venue || ""),
+      fact("Presentation format", ev.presentationFormat),
+      fact("Organized by", ev.organizedBy),
+      fact("Judging criteria", ev.judging),
+    ].filter(Boolean).join("");
+
+    // Tracks (e.g. PaperExpo's 4 tracks)
+    const tracksHtml = section("Tracks", listOrPara(ev.tracks));
+
+    // Rounds (e.g. Mission Impossible's 5 checkpoints)
+    const roundsHtml = section("Rounds", listOrPara(ev.rounds));
+
+    // Prerequisites / submission requirements
+    const prereqHtml = section("Prerequisites", listOrPara(ev.prerequisites));
+
+    // Eligibility (string or array, kept separate from Rules)
+    const eligibilityHtml = section("Eligibility", listOrPara(ev.eligibility));
+
+    // Important dates: render as a small grid of label/value cards
+    let datesHtml = "";
+    if (ev.importantDates && Object.keys(ev.importantDates).length) {
+      const cards = Object.entries(ev.importantDates)
+        .map(([key, val]) => fact(labelize(key), val))
+        .join("");
+      datesHtml = section("Important dates", `<div class="dates-grid">${cards}</div>`);
+    }
+
+    // Prizes
+    const prizesHtml = section("Prizes", listOrPara(ev.prizes));
 
     main.innerHTML = `
       <div class="breadcrumb"><span class="cat">${ev.category}</span> · ${CONFIG.eventName}</div>
       <img class="event-hero-img" src="${ev.image}" alt="${ev.title}" loading="lazy">
       <h1>${ev.title}</h1>
+      ${ev.tagline ? `<p class="tagline">${ev.tagline}</p>` : ""}
       <div class="meta-row">
         <span class="fee-badge">Fee: ${ev.fee}</span>
         <span>${CONFIG.eventDateDisplay}</span>
-        <span>${CONFIG.venue}</span>
+        <span>${ev.venue || CONFIG.venue}</span>
       </div>
 
       <p style="color:var(--text-dim); max-width:65ch;">${ev.blurb}</p>
+
+      ${factsHtml ? `<div class="fact-grid">${factsHtml}</div>` : ""}
 
       <div class="desc-block">
         <h2>About this event</h2>
         <p>${ev.fullDescription || ev.blurb}</p>
         ${rulesHtml ? `
-          <h2 style="margin-top:1.5rem;">Rules &amp; eligibility</h2>
+          <h2 style="margin-top:1.5rem;">Rules</h2>
           <ul class="rules-list">${rulesHtml}</ul>
         ` : ""}
       </div>
+
+      ${tracksHtml}
+      ${roundsHtml}
+      ${prereqHtml}
+      ${datesHtml}
+      ${eligibilityHtml}
+      ${prizesHtml}
 
       <div class="pay-panel">
         <div>
