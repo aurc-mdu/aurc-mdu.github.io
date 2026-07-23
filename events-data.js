@@ -5,11 +5,15 @@
 //   event.html?slug=<slug>
 //
 // PAYMENT MODEL: Razorpay Payment Pages.
-// All 10 events currently share ONE Razorpay Payment Page link
+// All events currently share ONE Razorpay Payment Page link
 // (https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view) — every event's
 // `razorpayLink` below points to it. If you later want separate pricing
 // or tracking per event, create one Payment Page per event in the
 // Razorpay dashboard and swap in each event's own link instead.
+//
+// NOTE: None of the 5 source event descriptions specified a
+// registration fee, so `fee` / `feeAmount` below are placeholders
+// ("TBA" / 0). Update these once you decide on pricing.
 // ============================================================
 const CONFIG = {
   eventName:        "SYNKRONIX '26",
@@ -30,143 +34,94 @@ const CONFIG = {
 
   events: [
     // ---- Technical events ----
-    { slug:"paper-presentation", category:"Technical", title:"Paper Presentation",
-      blurb:"Present original research or review work in a 10-minute slot judged by faculty.",
-      fullDescription:"Open to undergraduate and postgraduate students presenting original research, a literature review, or an applied case study relevant to computer science and engineering. Each team gets a 10-minute presentation slot followed by 5 minutes of questions from the judging panel. Submit an abstract (250–300 words) in advance for shortlisting.",
+    { slug:"code-auction", category:"Technical", title:"Code Auction",
+      blurb:"Think Fast. Bid Smart. Code Better — bid Virtual Coins for coding problems, then solve what you win.",
+      fullDescription:"Coding topics are auctioned one by one. Teams bid using their allotted Virtual Coins, and all successful bids are final — only the problems your team wins in the Auction Round can be attempted in the Coding Round. Solutions may be implemented in C, C++, Java, or Python. Teams can also purchase a Sealed Power Card containing a random advantage or challenge.",
       rules:[
-        "Teams of 1–2 members.",
-        "Abstract submission required before the event; shortlisted entries present on the day.",
-        "10-minute presentation + 5-minute Q&A per team.",
-        "Plagiarism checks apply — cite all external sources.",
-        "Judging on originality, clarity, and depth of analysis."
+        "Teams of 3 members.",
+        "Coding topics are auctioned one by one; bid only with allotted Virtual Coins.",
+        "All successful bids are final — only problems won in the auction can be attempted.",
+        "Solutions may be implemented in C, C++, Java, or Python.",
+        "Unsolved problems incur negative marking.",
+        "Teams can purchase a Sealed Power Card for a random advantage or challenge.",
+        "A Tie-Breaker Round determines the winner in case of a tie."
       ],
-      fee:"₹250", feeAmount:150, image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb6lnS9du-_QyxxpuTyfdOOeTgyM3xA86trxS3Z_h4jdARZkJj6gXHlaEm&s=10",
+      fee:"TBA", feeAmount:0, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Code+Auction",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
 
-    { slug:"algorithmic auction", category:"Technical", title:"algorithmic auction",
-      blurb:"24-hour build sprint, teams of up to 4, problem statements released on the day.",
-      fullDescription:"A 24-hour on-campus build sprint. Problem statements across tracks (web, mobile, AI/ML, and open innovation) are released at kickoff — no pre-built projects allowed. Mentors circulate throughout the night, and final demos are judged live the next morning. Meals and a dedicated workspace are provided for registered teams.",
+    { slug:"paperexpo", category:"Technical", title:"PaperExpo – Paper Presentation",
+      blurb:"Present original research or an applied project across AI/ML, cybersecurity, IoT, or cloud — 10 minutes per team.",
+      fullDescription:"A professional technical paper presentation event where participants present original research, innovative solutions, or emerging technologies before a panel of experts, across four tracks: AI & ML / Data Science, Cybersecurity & Networks, Software Engineering & IoT, and Cloud Computing & Database Management. Each team gets a 10-minute slot (7-minute presentation + 3-minute Q&A). A full paper (max 10 pages, Times New Roman 12pt, two columns, A4) and a PPT in the prescribed template must be submitted in advance.",
       rules:[
-        "Teams of 2–4 members.",
-        "All code must be written during the 24-hour window.",
-        "Any tech stack allowed; open-source libraries permitted.",
-        "Final demo: 5 minutes + 3-minute Q&A per team.",
-        "Judged on innovation, technical execution, and completeness."
+        "Individual or team of up to 3 members.",
+        "Full paper submission required (max 10 pages, prescribed format) plus PPT using the prescribed template.",
+        "Papers must be original and free from plagiarism.",
+        "Presentation: 7 minutes, followed by 3 minutes of Q&A.",
+        "Judges' decision is final.",
+        "Certificates awarded only to registered participants."
       ],
-      fee:"₹250 / team", feeAmount:400, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Hackathon",
-      razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
-
-    { slug:"coding-contest", category:"Technical", title:"Coding Contest",
-      blurb:"Timed competitive programming round, individual entries, standard judge platform.",
-      fullDescription:"A timed individual competitive-programming round hosted on a standard online judge. Problems range from easy to hard across arrays, graphs, dynamic programming, and greedy algorithms. Partial scoring applies, so attempt every problem you can rather than only the ones you're sure of.",
-      rules:[
-        "Individual participation only.",
-        "Duration: 2 hours, fixed problem set.",
-        "Partial scoring for partially correct solutions.",
-        "Any language supported by the judge platform is allowed.",
-        "Plagiarism detection is run on all submissions."
-      ],
-      fee:"₹100", feeAmount:100, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Coding+Contest",
-      razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
-
-    { slug:"technical-quiz", category:"Technical", title:"Technical Quiz",
-      blurb:"Rapid-fire and buzzer rounds covering CS fundamentals, teams of 2.",
-      fullDescription:"A prelims-and-finals format quiz covering CS fundamentals — algorithms, operating systems, networks, databases, and current tech trends. Top teams from a short written prelim advance to a live buzzer-round final in front of the audience.",
-      rules:[
-        "Teams of 2 members.",
-        "Written prelim round shortlists teams for the final.",
-        "Final round uses a live buzzer system.",
-        "No electronic devices permitted during either round.",
-        "Quizmaster's decision is final on all disputes."
-      ],
-      fee:"₹100 / team", feeAmount:100, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Technical+Quiz",
-      razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
-
-    { slug:"project-expo", category:"Technical", title:"Project Expo",
-      blurb:"Showcase a working prototype or research project to judges and visitors.",
-      fullDescription:"An exhibition-style showcase for working prototypes, research projects, or applied engineering builds. Teams get a table and power outlet to display their project through the day, with judges visiting each stall for a walkthrough and Q&A.",
-      rules:[
-        "Teams of up to 3 members.",
-        "Project must be a working prototype, not slides-only.",
-        "Bring your own peripherals; power outlets provided.",
-        "Judges visit stalls between 11 AM–2 PM.",
-        "Judged on functionality, originality, and real-world relevance."
-      ],
-      fee:"₹200 / team", feeAmount:200, image:"https://placehold.co/900x500/12151C/5B8DEF?text=Project+Expo",
+      fee:"TBA", feeAmount:0, image:"https://placehold.co/900x500/12151C/5B8DEF?text=PaperExpo",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
 
     // ---- Non-technical events ----
-    { slug:"treasure-hunt", category:"Non-Technical", title:"Treasure Hunt",
-      blurb:"Campus-wide clue trail, teams of 3–4, roughly 90 minutes.",
-      fullDescription:"A campus-wide clue trail blending riddles, light physical tasks, and a few tech-flavoured puzzles. Teams start at staggered intervals and race to the final checkpoint — the fastest correct finish wins.",
+    { slug:"escape-room", category:"Non-Technical", title:"Escape Room – The Last Evidence",
+      blurb:"Step into a detective's shoes and crack a murder mystery before time runs out.",
+      fullDescription:"Investigate a thrilling crime scene, analyze evidence, decode hidden clues, and identify the murderer, weapon, and motive within the time limit. Three teams play simultaneously, each working from a different set of clues that lead to the same final solution — teamwork, observation, and logical thinking are key.",
       rules:[
-        "Teams of 3–4 members.",
-        "Staggered start times will be assigned on the day.",
-        "Trail stays within designated campus zones.",
-        "No outside help or phone use during the hunt.",
-        "Fastest correct completion wins; time is the primary tiebreaker."
+        "Teams of 3 members.",
+        "Three teams play simultaneously, each with a different set of clues leading to the same solution.",
+        "10-minute time limit per team.",
+        "Teams must solve only their assigned clues — no communicating or sharing clues with other teams.",
+        "Mobile phones, smartwatches, and other electronic devices are strictly prohibited.",
+        "Props and clues must not be damaged, removed, or tampered with, and must stay inside the event area.",
+        "Clue sharing or any unfair means results in immediate disqualification.",
+        "Event coordinators' and judges' decision is final."
       ],
-      fee:"₹150 / team", feeAmount:150, image:"https://placehold.co/900x500/12151C/FFC857?text=Treasure+Hunt",
+      fee:"TBA", feeAmount:0, image:"https://placehold.co/900x500/12151C/FFC857?text=Escape+Room",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
 
-    { slug:"gaming-arena", category:"Non-Technical", title:"Gaming Arena",
-      blurb:"Esports bracket — check the schedule for which title is featured this year.",
-      fullDescription:"A single-elimination esports bracket. The featured title and format (solo or squad) will be posted closer to the event on the announcements page — registration secures your slot in the bracket draw.",
+    { slug:"mission-impossible", category:"Non-Technical", title:"Mission Impossible",
+      blurb:"Five checkpoints — observation, logic, memory, and gesture-only communication — to unlock the Final Vault.",
+      fullDescription:"A five-checkpoint non-technical event testing observation, logic, memory, communication, and teamwork. Teams collect clues at each round — Observation, Logic, Card Memory, and a gesture-only Communication round — then combine them to crack the Final Vault password. First to buzz gets the first attempt, with up to three alternate attempts.",
       rules:[
-        "Format depends on the featured title (see announcements).",
-        "Single-elimination bracket; late arrivals forfeit their slot.",
-        "Own controller/peripherals allowed if compatible.",
-        "Unsporting conduct results in disqualification.",
-        "Organizers' ruling is final on all in-match disputes."
+        "Teams of 2 members.",
+        "Two teams compete simultaneously.",
+        "No electronic gadgets allowed.",
+        "No unfair means.",
+        "Gestures only during the Communication round.",
+        "Judges' decision is final."
       ],
-      fee:"₹100", feeAmount:100, image:"https://placehold.co/900x500/12151C/FFC857?text=Gaming+Arena",
+      fee:"TBA", feeAmount:0, image:"https://placehold.co/900x500/12151C/FFC857?text=Mission+Impossible",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
 
-    { slug:"photography", category:"Non-Technical", title:"Photography Contest",
-      blurb:"Submit up to 3 entries on the day's theme, judged by an external panel.",
-      fullDescription:"A themed photography contest — the theme is announced at the start of the event, and entries are shot and submitted within the event window. An external judging panel scores on composition, relevance to the theme, and technical quality.",
+    { slug:"kadhaikkum-kalam", category:"Non-Technical", title:"Kadhaikkum Kalam",
+      blurb:"\"Think. Speak. Convince. Win.\" — a debate with a role-reversal twist in the final. Organized by the CSE Department.",
+      fullDescription:"A dynamic debate competition testing critical thinking, communication, and the ability to present convincing arguments. Held in two stages: an Elimination Round, and a Grand Finale with a role-reversal twist where teams must switch stance after the buzzer and continue debating from the opposite side without repeating earlier arguments. Organized by the Department of Computer Science and Engineering (CSE) at the Conference Hall.",
       rules:[
-        "Individual entries only, up to 3 photos per participant.",
-        "Photos must be taken within the event window.",
-        "Basic color correction allowed; heavy compositing is not.",
-        "Submit via the link shared at the venue.",
-        "Judged on composition, theme relevance, and technical quality."
+        "Teams of 3 members.",
+        "Topics allotted by random draw; a toss decides for/against.",
+        "Each participant gets 1 minute to present arguments.",
+        "Top two teams from the elimination round advance to the Grand Finale.",
+        "In the final, teams must switch stance after the buzzer and continue from the opposite perspective.",
+        "Repeating previously presented arguments after the role reversal is not allowed.",
+        "Participants must maintain respectful communication throughout.",
+        "Judges' decision is final and binding."
       ],
-      fee:"₹80", feeAmount:80, image:"https://placehold.co/900x500/12151C/FFC857?text=Photography",
-      razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
-
-    { slug:"meme-contest", category:"Non-Technical", title:"Meme Making Contest",
-      blurb:"Live prompt, 30 minutes, original artwork only — judged on relevance and craft.",
-      fullDescription:"A live-prompt meme-making contest. The theme is revealed on the spot and participants have 30 minutes to create and submit an original meme — templates are fine, but the joke and any custom artwork must be your own.",
-      rules:[
-        "Individual participation only.",
-        "Prompt is revealed at the start; 30-minute time limit.",
-        "Original captions/artwork only — no reposting existing memes.",
-        "One submission per participant.",
-        "Judged on relevance to the prompt, originality, and humor."
-      ],
-      fee:"₹50", feeAmount:50, image:"https://placehold.co/900x500/12151C/FFC857?text=Meme+Contest",
-      razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
-
-    { slug:"talent-show", category:"Non-Technical", title:"Talent Show",
-      blurb:"Open-genre stage slot, up to 5 minutes, solo or group.",
-      fullDescription:"An open-genre stage slot for music, dance, comedy, spoken word, or any other performing act. Solo and group entries are both welcome — bring your own backing track if needed, basic stage sound and lighting are provided.",
-      rules:[
-        "Solo or group (up to 6 performers).",
-        "Maximum 5 minutes on stage per act.",
-        "Backing tracks must be shared in advance in a standard audio format.",
-        "Content must be appropriate for a general campus audience.",
-        "Judged on performance quality, creativity, and stage presence."
-      ],
-      fee:"₹100", feeAmount:100, image:"https://placehold.co/900x500/12151C/FFC857?text=Talent+Show",
+      fee:"TBA", feeAmount:0, image:"https://placehold.co/900x500/12151C/FFC857?text=Kadhaikkum+Kalam",
       razorpayLink:"https://pages.razorpay.com/pl_TB28gkZvmVtM7z/view" },
   ],
 
-  // 10 sponsor slots — replace image + url per sponsor.
-  sponsors: Array.from({length:10}, (_,i) => ({
-    name: "Sponsor " + (i+1),
-    logo: "https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+" + (i+1),
-    url: "#"
-  })),
+  // 10 sponsor slots — replace name, logo, and url for each sponsor below.
+  sponsors: [
+    { name:"Sponsor 1",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+1",  url:"#" },
+    { name:"Sponsor 2",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+2",  url:"#" },
+    { name:"Sponsor 3",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+3",  url:"#" },
+    { name:"Sponsor 4",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+4",  url:"#" },
+    { name:"Sponsor 5",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+5",  url:"#" },
+    { name:"Sponsor 6",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+6",  url:"#" },
+    { name:"Sponsor 7",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+7",  url:"#" },
+    { name:"Sponsor 8",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+8",  url:"#" },
+    { name:"Sponsor 9",  logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+9",  url:"#" },
+    { name:"Sponsor 10", logo:"https://placehold.co/240x120/EDEFF2/12151C?text=Sponsor+10", url:"#" },
+  ],
 };
-
