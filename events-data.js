@@ -38,7 +38,7 @@ const CONFIG = {
   // Optional: one Google Form if you'd rather also collect details
   // separately from Razorpay's own custom fields. Leave blank ("") to
   // hide the embedded form on event pages entirely.
-  googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSf3RR7chV8XsWDJ3wmDEpRfv0JD12mrAZdprkLvrM4cylFc-g/viewform?usp=sharing&ouid=113783326047631300675",
+  googleFormUrl: "",
 
   events: [
     // ---- Technical events ----
